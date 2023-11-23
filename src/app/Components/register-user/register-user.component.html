@@ -1,0 +1,73 @@
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login" [formGroup]="userForm" (ngSubmit)="register()">
+				<div class="login__field">
+					<i class="fa-solid fa-user"></i>
+					<input type="text" class="login__input" placeholder="FirstName" formControlName="firstname">
+				</div>
+				<div class="login__field">
+					<i class="fa-solid fa-lock"></i>
+					<input type="text" class="login__input" placeholder="Lastname" formControlName="lastname">
+				</div>
+                <div class="login__field">
+					<i class="fa-solid fa-lock"></i>
+					<input type="text" class="login__input" placeholder="Email" formControlName="email">
+				</div>
+                <div class="login__field">
+					<i class="fa-solid fa-lock"></i>
+					<input type="password" class="login__input" placeholder="Password" formControlName="password">
+				</div>
+                <div class="login__field">
+					<i class="fa-solid fa-lock"></i>
+					<input type="text" class="login__input" placeholder="Role" formControlName="role">
+				</div>
+                <div class="login__field">
+					<i class="fa-solid fa-lock"></i>
+					<input type="date" class="login__input" placeholder="Lastname" formControlName="birthDate">
+				</div>
+                <div class="login__field">
+					<i class="fa-solid fa-lock"></i>
+					<input type="text" class="login__input" placeholder="Adresse" formControlName="adresse">
+				</div>
+                <div class="login__field">
+					<i class="fa-solid fa-lock"></i>
+					<input type="text" class="login__input" placeholder="Sex" formControlName="sex">
+				</div>
+                <div class="login__field">
+					<i class="fa-solid fa-lock"></i>
+					<input type="text" class="login__input" placeholder="University" formControlName="university">
+				</div>
+                <div class="login__field">
+					<i class="fa-solid fa-lock"></i>
+					<input type="text" class="login__input" placeholder="Cin" formControlName="cin">
+				</div>
+                
+                
+
+                <div class="login__field">
+					<i class="fa-solid fa-lock"></i>
+					<input type="text" class="login__input" placeholder="Phone number" formControlName="phoneNumber">
+				</div>
+				<button class="button login__submit" type="submit">
+					<span class="button__text">Register Now</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>				
+			</form>
+			<div class="social-login">
+				<h3>log in via</h3>
+				<div class="social-icons">
+					<a href="#" class="social-login__icon fab fa-instagram"></a>
+					<a href="#" class="social-login__icon fab fa-facebook"></a>
+					<a href="#" class="social-login__icon fab fa-twitter"></a>
+				</div>
+			</div>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
+</div>

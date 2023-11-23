@@ -9,6 +9,9 @@ import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { ErrorComponent } from './Components/error/error.component';
 import { BookDetailsComponent } from './Components/book-details/book-details.component';
+import { LoginUserComponent } from './Components/login-user/login-user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterUserComponent } from './Components/register-user/register-user.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,16 @@ import { BookDetailsComponent } from './Components/book-details/book-details.com
     HeaderComponent,
     FooterComponent,
     ErrorComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    LoginUserComponent,
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
