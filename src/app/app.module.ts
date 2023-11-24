@@ -12,6 +12,8 @@ import { BookDetailsComponent } from './Components/book-details/book-details.com
 import { LoginUserComponent } from './Components/login-user/login-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
+import { ProfileUserComponent } from './Components/profile-user/profile-user.component';
+import { ModifierPasswordComponent } from './Components/modifier-password/modifier-password.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { RegisterUserComponent } from './Components/register-user/register-user.
     BookDetailsComponent,
     LoginUserComponent,
     RegisterUserComponent,
-    
+    ,
+    ProfileUserComponent,
+    ModifierPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../Entities/user';
 import { Observable } from 'rxjs';
@@ -15,15 +15,23 @@ export class UserService {
   }
 
   getUserById(id: string): Observable<User> {
-    return this.http.get<User>(`${url}/${id}`);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.http.get<User>(`${url}/${id}`,{headers:reqHeader});
   }
 
   createUser(body: any): Observable<any> {
     return this.http.post<any>(url, body);
   }
 
-  updateUser(id: string, body: any): Observable<User> {
-    return this.http.put<User>(`${url}/${id}`, body);
+  updateUser(id: string, body: any): Observable<any> {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.http.put<any>(`${url}/${id}`, body,{headers:reqHeader});
   }
 
   deleteUser(id: string): Observable<User> {
@@ -32,5 +40,13 @@ export class UserService {
 
   loginUser(body: any): Observable<any> {
     return this.http.post<any>(`${url}/loginUser`, body);
+  }
+
+  changePassword(id: string, body: any): Observable<any> {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.http.put<any>(`${url}/changepass/${id}`, body,{headers:reqHeader});
   }
 }

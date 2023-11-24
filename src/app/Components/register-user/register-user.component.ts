@@ -32,6 +32,7 @@ export class RegisterUserComponent implements OnInit {
   }
 
   register(){
+    this.userForm.patchValue({ role: 'user' });
     this.serviceUser.createUser(this.userForm.value).subscribe(
       data=>{
         console.log(data);
