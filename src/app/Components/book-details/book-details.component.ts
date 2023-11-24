@@ -6,6 +6,7 @@ import { ReviewService } from 'src/app/Services/review.service';
 import { Review } from 'src/app/Entities/review';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UserService } from 'src/app/Services/user.service';
 
 @Component({
   selector: 'app-book-details',
@@ -15,7 +16,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class BookDetailsComponent implements OnInit {
 
   constructor(private bookService: BookService, private activatedRoute: ActivatedRoute
-    , private reviewService: ReviewService,private fb:FormBuilder ) { }
+    , private reviewService: ReviewService,private fb:FormBuilder ,
+    private  userService: UserService) { }
   bookId: string = "";
   book!: Book;
   review: Review=new Review('','',0,'',new Date());
@@ -37,7 +39,7 @@ addReview(id:string){
   this.review.comment=this.reviewForm.value.comment;
 this.review.rating=this.reviewForm.value.rating;
   this.review.book=id;
-this.review.user="655e51cc0a420146dcf6d9cd";
+this.review.user=this.jwt.decodeToken(localStorage.getItem('token')!)['_id'];
 
 console.log(this.review)
   this.reviewService.addReview(this.review).subscribe(
@@ -67,7 +69,10 @@ console.log(this.review)
           }
         )
 
-      })
+      });
+
+
+     
 
 
   }
