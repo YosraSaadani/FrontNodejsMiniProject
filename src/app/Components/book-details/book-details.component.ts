@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ReviewService } from 'src/app/Services/review.service';
 import { Review } from 'src/app/Entities/review';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-book-details',
@@ -20,6 +21,7 @@ export class BookDetailsComponent implements OnInit {
   review: Review=new Review('','',0,'',new Date());
   reviews: any[] = [];
   reviewForm!:FormGroup;
+  jwt=new JwtHelperService();
 
 initForm()
 {

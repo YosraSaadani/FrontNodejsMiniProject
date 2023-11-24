@@ -25,7 +25,7 @@ import { ModifierPasswordComponent } from './Components/modifier-password/modifi
     BookDetailsComponent,
     LoginUserComponent,
     RegisterUserComponent,
-    ,
+
     ProfileUserComponent,
     ModifierPasswordComponent
   ],
