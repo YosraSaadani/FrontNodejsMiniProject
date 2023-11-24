@@ -22,7 +22,8 @@ import { RegisterUserComponent } from './Components/register-user/register-user.
     ErrorComponent,
     BookDetailsComponent,
     LoginUserComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
+    
   ],
   imports: [
     BrowserModule,

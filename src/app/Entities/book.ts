@@ -5,6 +5,7 @@ export class Book {
         public type: string,
         public author: string,
         public releaseDate: Date,
-        public image: string
+        public image: string,
+        public description: string,
       ) {}
 }
