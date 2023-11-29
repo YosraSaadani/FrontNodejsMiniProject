@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Loan } from '../Entities/loan';
 import { Observable } from 'rxjs';
@@ -16,23 +16,43 @@ export class LoanService {
   }
 
   getLoanById(id: string): Observable<Loan> {
-    return this.http.get<Loan>(`${apiUrl}/${id}`);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.http.get<Loan>(`${apiUrl}/${id}`,{headers:reqHeader});
   }
 
   createLoan(body: any): Observable<Loan> {
-    return this.http.post<Loan>(apiUrl, body);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.http.post<Loan>(apiUrl, body,{headers:reqHeader});
   }
 
   updateLoan(id: string, body: any): Observable<Loan> {
-    return this.http.put<Loan>(`${apiUrl}/${id}`, body);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.http.put<Loan>(`${apiUrl}/${id}`, body,{headers:reqHeader});
   }
 
   deleteLoan(id: string): Observable<Loan> {
-    return this.http.delete<Loan>(`${apiUrl}/${id}`);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.http.delete<Loan>(`${apiUrl}/${id}`,{headers:reqHeader});
   }
 
   getLoansByUser(id: string): Observable<Loan[]> {
-    return this.http.get<Loan[]>(`${apiUrl}/${id}/user`);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.http.get<Loan[]>(`${apiUrl}/${id}/user`,{headers:reqHeader});
   }
 
 }
