@@ -32,7 +32,8 @@ export class LoginAdminComponent implements OnInit {
       data=>{
         console.log(data);
         localStorage.setItem('token',data.token);
-        this.userConnected.setUserConnected(true);
+        console.log(data.user.role);
+        localStorage.setItem('role',data.user.role);
         this.router.navigate(['/adminDash']);  
         
       

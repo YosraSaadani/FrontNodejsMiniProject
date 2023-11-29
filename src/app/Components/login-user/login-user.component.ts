@@ -35,6 +35,7 @@ export class LoginUserComponent implements OnInit {
       data=>{
         console.log(data);
         localStorage.setItem('token',data.token);
+        localStorage.setItem('role',data.user.role);
         this.userConnected.setUserConnected(true);
         this.router.navigate(['/books']);  
         
