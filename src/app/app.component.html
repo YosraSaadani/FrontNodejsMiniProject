@@ -1,7 +1,7 @@
 <ng-container *ngIf="!isLoginPage">
-    <app-header *ngIf="isUser"></app-header>
-
+    <app-header *ngIf="role==='user'"></app-header>
+<!-- <app-header-admin *ngIf="role==='admin'"></app-header-admin> -->
   </ng-container>
   
   <router-outlet></router-outlet>
-  <app-footer *ngIf="isUser"></app-footer>
+  <app-footer *ngIf="role=='user'"></app-footer>
