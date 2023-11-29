@@ -11,7 +11,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAllUsers():Observable<User[]>{
-    return this.http.get<User[]>(url);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.http.get<User[]>(url,{headers:reqHeader});
   }
 
   getUserById(id: string): Observable<User> {
@@ -35,7 +39,12 @@ export class UserService {
   }
 
   deleteUser(id: string): Observable<User> {
-    return this.http.delete<User>(`${url}/${id}`);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.http.delete<User>(`${url}/${id}`,{headers:reqHeader});
+    
   }
 
   loginUser(body: any): Observable<any> {
