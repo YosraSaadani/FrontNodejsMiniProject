@@ -1,1 +1,33 @@
-<p>loans works!</p>
+<!-- store products -->
+<div class="row">
+    <table class="table table-centered">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Remove</th>
+                <th>Quick View</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let b of loans; let i = index">
+                <td>
+                    <img [src]="b.book.image" alt="" height="200px"  width="150px" style="vertical-align: middle;">
+                </td>
+                <td>{{b.book.name}}</td>
+                <td>{{b.book.type}}</td>
+                <td>
+                    <button class="btn btn-wishlist" (click)="remove(b._id)">
+                        <i class="fa fa-heart"></i> Remove from Wishlist
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-quick-view" [routerLink]="['/books', b.book._id]">
+                        <i class="fa fa-eye"></i> Quick View
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

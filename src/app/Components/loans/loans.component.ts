@@ -12,7 +12,11 @@ loans:any[]=[];
 jwt=new JwtHelperService();
 
   constructor(private loanService: LoanService) { }
-
+  remove(id:string){
+    this.loanService.deleteLoan(id).subscribe((data:any)=>{
+      console.log(data);
+    })
+  }
   ngOnInit(): void {
     this.loanService.getLoansByUser(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']).subscribe((data:any)=>{
       this.loans=data;
