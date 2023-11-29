@@ -36,4 +36,8 @@ getBooksReviews(id: string): Observable<any> {
   return this.http.get<any>(`${apiUrl}/${id}/reviews`);
 }
 
+getBookAverageRating(id: string): Observable<Number> {
+  return this.http.get<Number>(`${apiUrl}/${id}/avgRatings`);
+}
+
 }

@@ -7,6 +7,8 @@ import { Review } from 'src/app/Entities/review';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from 'src/app/Services/user.service';
+import { LoanService } from 'src/app/Services/loan.service';
+import { Loan } from 'src/app/Entities/loan';
 
 @Component({
   selector: 'app-book-details',
@@ -17,14 +19,16 @@ export class BookDetailsComponent implements OnInit {
 
   constructor(private bookService: BookService, private activatedRoute: ActivatedRoute
     , private reviewService: ReviewService,private fb:FormBuilder ,
-    private  userService: UserService) { }
+    private loanService:LoanService
+    ) { }
   bookId: string = "";
+  loan:Loan=(new Loan(new Date(),new Date(),'',''));
   book!: Book;
   review: Review=new Review('','',0,'',new Date());
   reviews: any[] = [];
   reviewForm!:FormGroup;
   jwt=new JwtHelperService();
-
+avgRating=0;
 initForm()
 {
   this.reviewForm=this.fb.group({
@@ -32,6 +36,24 @@ initForm()
     rating:[0],
     
   });
+}
+
+getRatingArray(rating: number): number[] {
+  rating=Math.round(rating);
+  return Array(rating).fill(0).map((_, index) => index + 1);
+}
+
+addLoan(id:string){
+  this.loan.book=id;
+  this.loan.user=this.jwt.decodeToken(localStorage.getItem('token')!)['_id'];
+  this.loan.loanDate=new Date();
+  this.loan.returnDate = new Date();
+  this.loan.returnDate.setDate(this.loan.returnDate.getDate() + 15)
+    this.loanService.createLoan(this.loan).subscribe(
+    (data:any)=>{
+      console.log(data);
+    }
+  )
 }
 
 
@@ -64,7 +86,10 @@ console.log(this.review)
         this.bookService.getBooksReviews(this.bookId).subscribe(
           (data: any) => {
             this.reviews = data;
-
+this.bookService.getBookAverageRating(this.bookId).subscribe(
+  (data:any)=>{
+    this.avgRating=data;
+  })
 
           }
         )

@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
 import { ProfileUserComponent } from './Components/profile-user/profile-user.component';
 import { ModifierPasswordComponent } from './Components/modifier-password/modifier-password.component';
+import { LoansComponent } from './Components/loans/loans.component';
+import { Favorite } from './Entities/favorite';
 import { FavoriteBooksComponent } from './Components/favorite-books/favorite-books.component';
 
 @NgModule({
@@ -29,7 +31,8 @@ import { FavoriteBooksComponent } from './Components/favorite-books/favorite-boo
 
     ProfileUserComponent,
     ModifierPasswordComponent,
-    FavoriteBooksComponent
+  LoansComponent,
+  FavoriteBooksComponent
   ],
   imports: [
     BrowserModule,

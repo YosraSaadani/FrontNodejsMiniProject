@@ -8,6 +8,7 @@ import { RegisterUserComponent } from './Components/register-user/register-user.
 import { FavoriteBooksComponent } from './Components/favorite-books/favorite-books.component';
 import { ProfileUserComponent } from './Components/profile-user/profile-user.component';
 import { ModifierPasswordComponent } from './Components/modifier-password/modifier-password.component';
+import { LoansComponent } from './Components/loans/loans.component';
 
 const routes: Routes = [
   {path:'books',title:'List of Books',component:BooksListComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'favorite',title:'Favorite Books',component:FavoriteBooksComponent},
   {path:'profile',title:'Profile',component:ProfileUserComponent},
   {path:'changepass',title:'Change password',component:ModifierPasswordComponent},
+  {path:'loans',title:'Loans',component:LoansComponent},
   {path:'',redirectTo:'/books',pathMatch:'full'},
   {path:'**',title:'Error',component:ErrorComponent}
 
