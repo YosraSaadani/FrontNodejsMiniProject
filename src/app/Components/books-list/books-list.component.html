@@ -93,7 +93,7 @@
               <i class="fa fa-star"></i>
             </div>
             <div class="product-btns">
-              <button class="add-to-wishlist"><i class="fa fa-heart"></i><span class="tooltipp">add to wishlist</span></button>
+              <button class="add-to-wishlist" (click)="addToFavorite(b._id)"><i class="fa fa-heart"></i><span class="tooltipp">add to wishlist</span></button>
               <button class="quick-view" [routerLink]="['/books',b._id]"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
             </div>
           </div>

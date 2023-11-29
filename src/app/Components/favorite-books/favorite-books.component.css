@@ -1,0 +1,16 @@
+.table-centered {
+    margin: auto;
+    width: 50%; /* Adjust the width as needed */
+}
+
+.table th,
+.table td {
+    text-align: center;
+    height: 200px;
+
+}
+
+.btn {
+    display: block;
+    margin: auto;
+}

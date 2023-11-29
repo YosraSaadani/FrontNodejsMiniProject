@@ -1,0 +1,33 @@
+<!-- store products -->
+<div class="row">
+    <table class="table table-centered">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Wishlist</th>
+                <th>Quick View</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let b of favoriteList.books; let i = index">
+                <td>
+                    <img [src]="b.book.image" alt="" height="100%" style="vertical-align: middle;">
+                </td>
+                <td>{{b.book.name}}</td>
+                <td>{{b.book.type}}</td>
+                <td>
+                    <button class="btn btn-wishlist" (click)="remove(b.book._id)">
+                        <i class="fa fa-heart"></i> Remove from Wishlist
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-quick-view" [routerLink]="['/books', b.book._id]">
+                        <i class="fa fa-eye"></i> Quick View
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

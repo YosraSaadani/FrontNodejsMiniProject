@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+
 import { User } from 'src/app/Entities/user';
 import { UserService } from 'src/app/Services/user.service';
 
@@ -12,7 +14,7 @@ import { UserService } from 'src/app/Services/user.service';
 export class ProfileUserComponent implements OnInit {
   userForm!:FormGroup;
   user!:any;
-  constructor(private serviceUser: UserService,private fb:FormBuilder ) { }
+  constructor(private serviceUser: UserService,private fb:FormBuilder,private router:Router ) { }
 jwt=new JwtHelperService();
   ngOnInit(): void {
     this.serviceUser.getUserById(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']).subscribe(
@@ -41,7 +43,8 @@ jwt=new JwtHelperService();
     this.serviceUser.updateUser(this.jwt.decodeToken(localStorage.getItem('token')!)['_id'],this.userForm.value).subscribe(
       data=>{
         console.log(data);
-        localStorage.setItem('token',data.token);
+        this.router.navigate(['/books']);
+        
         
       }
     )

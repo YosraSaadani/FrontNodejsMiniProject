@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterUserComponent } from './Components/register-user/register-user.component';
 import { ProfileUserComponent } from './Components/profile-user/profile-user.component';
 import { ModifierPasswordComponent } from './Components/modifier-password/modifier-password.component';
+import { FavoriteBooksComponent } from './Components/favorite-books/favorite-books.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ModifierPasswordComponent } from './Components/modifier-password/modifi
     RegisterUserComponent,
 
     ProfileUserComponent,
-    ModifierPasswordComponent
+    ModifierPasswordComponent,
+    FavoriteBooksComponent
   ],
   imports: [
     BrowserModule,
