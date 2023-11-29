@@ -17,6 +17,12 @@
           class="formbold-form-input"
           formControlName="firstname"
         />
+        <div *ngIf="firstname?.hasError('required') && firstname?.touched" style="color: red;">
+          First Name is required.
+          </div>
+          <div *ngIf="firstname?.hasError('minlength') && !firstname?.hasError('required') && firstname?.touched" style="color: red;">
+            First Name must be at least 3 characters.
+          </div>
       </div>
 
       <div>
@@ -28,6 +34,12 @@
           class="formbold-form-input"
           formControlName="lastname"
         />
+        <div *ngIf="lastname?.hasError('required') && lastname?.touched" style="color: red;">
+          Last Name is required.
+          </div>
+          <div *ngIf="lastname?.hasError('minlength') && !lastname?.hasError('required') && lastname?.touched" style="color: red;">
+            Last Name must be at least 3 characters.
+          </div>
       </div>
 
      
@@ -41,6 +53,10 @@
           class="formbold-form-input"
           formControlName="birthDate"
         />
+        <div *ngIf="birthDate?.hasError('required') && birthDate?.touched" style="color: red;">
+          Birth date is required.
+          </div>
+        
       </div>
 
       <div>
@@ -52,6 +68,12 @@
           class="formbold-form-input"
           formControlName="adresse"
         />
+        <div *ngIf="adresse?.hasError('required') && adresse?.touched" style="color: red;">
+          Adress is required.
+          </div>
+          <div *ngIf="adresse?.hasError('minlength') && !adresse?.hasError('required') && adresse?.touched" style="color: red;">
+            Adress must be at least 3 characters.
+          </div>
       </div>
 
       <div>
@@ -63,6 +85,18 @@
           class="formbold-form-input"
           formControlName="phoneNumber"
         />
+        <div *ngIf="phoneNumber?.hasError('required') && phoneNumber?.touched" style="color: red;">
+          Phone number is required.
+          </div>
+          <div *ngIf="phoneNumber?.hasError('minlength') && !phoneNumber?.hasError('required') && phoneNumber?.touched" style="color: red;">
+            Phone number must be at least 8 characters.
+          </div>
+          <div *ngIf="phoneNumber?.hasError('maxlength') && !phoneNumber?.hasError('required') && phoneNumber?.touched" style="color: red;">
+            Phone number must be 8 characters max.
+          </div>
+          <div *ngIf="phoneNumber?.hasError('pattern') && !phoneNumber?.hasError('required') && phoneNumber?.touched" style="color: red;">
+            Phone number must be numeric.
+          </div>
       </div>
 
       <div>
@@ -71,6 +105,9 @@
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
+        <div *ngIf="phoneNumber?.hasError('required') && phoneNumber?.touched" style="color: red;">
+           Sex is required.
+          </div>
       </div>
 
       <div>
@@ -82,6 +119,12 @@
           class="formbold-form-input"
           formControlName="university"
         />
+        <div *ngIf="university?.hasError('required') && university?.touched" style="color: red;">
+          University is required.
+          </div>
+          <div *ngIf="university?.hasError('minlength') && !university?.hasError('required') && university?.touched" style="color: red;">
+            University must be at least 3 characters.
+          </div>
       </div>
 
       <div>
@@ -93,6 +136,18 @@
           class="formbold-form-input"
           formControlName="cin"
         />
+        <div *ngIf="cin?.hasError('required') && cin?.touched" style="color: red;">
+          Cin is required.
+          </div>
+          <div *ngIf="cin?.hasError('minlength') && !cin?.hasError('required') && cin?.touched" style="color: red;">
+            Cin must be at least 8 characters.
+          </div>
+          <div *ngIf="cin?.hasError('maxlength') && !cin?.hasError('required') && cin?.touched" style="color: red;">
+            Cin must be 8 characters max.
+          </div>
+          <div *ngIf="cin?.hasError('pattern') && !cin?.hasError('required') && cin?.touched" style="color: red;">
+            Cin must be numeric.
+          </div>
       </div>
 
       <div class="formbold-mb-3">
@@ -105,10 +160,16 @@
           formControlName="email"
           class="formbold-form-input"
         />
+        <div *ngIf="email?.hasError('required') && email?.touched" style="color: red;">
+          Email is required.
+          </div>
+          <div *ngIf="email?.hasError('pattern') && !email?.hasError('required') && email?.touched" style="color: red;">
+          Please enter a valid email address.
+          </div>
       </div>
 
       <div style="text-align: center!important;">
-        <button class="formbold-btn" type="submit">Update</button>
+        <button class="formbold-btn" type="submit" [disabled]="userForm.invalid">Update</button>
       </div>
     </form>
   </div>

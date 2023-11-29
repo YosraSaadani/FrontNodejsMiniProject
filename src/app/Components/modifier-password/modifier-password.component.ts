@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from 'src/app/Services/user.service';
 
@@ -15,11 +15,19 @@ export class ModifierPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm=this.fb.group({
-      oldPassword:[''],
-      newPassword:['']
+      oldPassword:['',[Validators.required, Validators.minLength(6)]],
+      newPassword:['',[Validators.required, Validators.minLength(6)]]
     });
 
   
+  }
+
+  get oldPassword() {
+    return this.userForm.get('oldPassword');
+  }
+
+  get newPassword() {
+    return this.userForm.get('newPassword');
   }
 
   modifier(){

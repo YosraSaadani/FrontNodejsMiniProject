@@ -11,8 +11,11 @@ import { FavoriteService } from 'src/app/Services/favorite.service';
 })
 export class BooksListComponent implements OnInit {
   jwt=new JwtHelperService();
+  selectedGenres: string[] = [];
   constructor(private bookService:BookService,private serviceFavorite:FavoriteService) { }
 books:Book[]=[];
+booksParGenre:Book[]=[];
+
  bookGenres = [
   'Fiction',
   'Science Fiction',
@@ -46,11 +49,12 @@ books:Book[]=[];
   'Trilogy',
   'Biographies',
   'Autobiographies',
-  'Fantasy',
+  
 ];
   ngOnInit(): void {
 this.bookService.getAllBooks().subscribe((data:Book[])=>{
   this.books=data;
+  this.booksParGenre=this.books;
   })
   }
   addToFavorite(id:string){
@@ -66,5 +70,40 @@ this.bookService.getAllBooks().subscribe((data:Book[])=>{
       }
     )
     
+  }
+
+  filter(i:number){
+    const genre = this.bookGenres[i];
+
+    // Toggle the selected genre
+    if (this.selectedGenres.includes(genre)) {
+      this.selectedGenres = this.selectedGenres.filter(g => g !== genre);
+    } else {
+      this.selectedGenres.push(genre);
+    }
+
+    // Filter books based on selected genres
+    if (this.selectedGenres.length > 0) {
+      this.booksParGenre = this.books.filter(book => this.selectedGenres.includes(book.type));
+    } else {
+      this.booksParGenre = this.books;
+    }
+
+    console.log(this.booksParGenre);
+  }
+
+  search(value: string) {
+    if (this.selectedGenres.length > 0) {
+      // Filter books based on selected genres
+      this.booksParGenre = this.books.filter(book => 
+        this.selectedGenres.includes(book.type) &&
+        (value === "" || book.name.toLowerCase().includes(value.toLowerCase()))
+      );
+    } else {
+      // No genres selected, return all books
+      this.booksParGenre = this.books.filter(book => 
+        value === "" || book.name.toLowerCase().includes(value.toLowerCase())
+      );
+    }
   }
 }

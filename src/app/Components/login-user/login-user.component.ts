@@ -1,5 +1,5 @@
 import {  Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserConnectedService } from 'src/app/Services/user-connected.service';
 
@@ -17,9 +17,16 @@ export class LoginUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm=this.fb.group({
-      email:[''],
-      password:['']
+      email: ['', [Validators.required,  Validators.pattern(/^\S+@\S+\.\S+$/)]],
+      password:['', [Validators.required, Validators.minLength(6)]]
     });
+  }
+  get email() {
+    return this.userForm.get('email');
+  }
+
+  get password() {
+    return this.userForm.get('password');
   }
 
   login(){

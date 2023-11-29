@@ -9,6 +9,12 @@ export class UserConnectedService {
 
   userConnected$ = this.userConnectedSubject.asObservable();
 
+  constructor() {
+    // Check if the user has a token during service initialization
+    const userToken = localStorage.getItem('token');
+    this.setUserConnected(!!userToken);
+  }
+
   setUserConnected(status: boolean) {
     this.userConnectedSubject.next(status);
   }
