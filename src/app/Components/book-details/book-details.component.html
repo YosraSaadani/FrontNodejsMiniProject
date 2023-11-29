@@ -93,7 +93,7 @@
 								<div class="col-md-3">
 									<div id="rating">
 										<div class="rating-avg">
-											<span>{{avgRating}}</span>
+											<span>{{avgRating |  number:'1.1-1'}}</span>
 											<div class="rating-stars">
 												<i class="fa fa-star"
 												*ngFor="let x of getRatingArray(avgRating)"></i>

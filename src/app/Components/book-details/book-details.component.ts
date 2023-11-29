@@ -102,6 +102,7 @@ console.log(this.review)
 }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.initForm();
     this.bookId = this.activatedRoute.snapshot.params['id'];
     console.log(this.bookId);

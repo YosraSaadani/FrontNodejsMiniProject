@@ -3,9 +3,10 @@
 		<div class="screen__content">
 			
 			<form class="login" [formGroup]="userForm" (ngSubmit)="login()">
-				
+				<h3>Login
+				</h3>
 				<div class="login__field">
-					<i class="fa-solid fa-user"></i>
+					
 					<input type="text" class="login__input" placeholder="Email" formControlName="email">
 					<div *ngIf="email?.hasError('required') && email?.touched" style="color: red;">
 						Email is required.
@@ -15,7 +16,7 @@
 					  </div>
 				</div>
 				<div class="login__field">
-					<i class="fa-solid fa-lock"></i>
+					
 					<input type="password" class="login__input" placeholder="Password" formControlName="password">
 					<div *ngIf="password?.hasError('required') && password?.touched" style="color: red;">
 						Password is required.
@@ -24,9 +25,10 @@
 						Password must be at least 6 characters.
 					  </div>
 				</div>
+				<a routerLink="/register">Register</a>
 				<button class="button login__submit" type="submit" [disabled]="userForm.invalid">
 					<span class="button__text">Log In Now</span>
-					<i class="button__icon fas fa-chevron-right"></i>
+					
 				</button>				
 			</form>
 			
