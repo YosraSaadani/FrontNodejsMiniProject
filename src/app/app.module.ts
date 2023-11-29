@@ -17,6 +17,12 @@ import { ModifierPasswordComponent } from './Components/modifier-password/modifi
 import { LoansComponent } from './Components/loans/loans.component';
 import { Favorite } from './Entities/favorite';
 import { FavoriteBooksComponent } from './Components/favorite-books/favorite-books.component';
+import { UsersListComponent } from './admin/users-list/users-list.component';
+import { HeaderAdminComponent } from './admin/header-admin/header-admin.component';
+import { AdminbooksListComponent } from './admin/adminbooks-list/adminbooks-list.component';
+import { AdminbookEditComponent } from './admin/adminbook-edit/adminbook-edit.component';
+import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
+import { AddBookComponent } from './admin/add-book/add-book.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,14 @@ import { FavoriteBooksComponent } from './Components/favorite-books/favorite-boo
     ProfileUserComponent,
     ModifierPasswordComponent,
   LoansComponent,
-  FavoriteBooksComponent
+  FavoriteBooksComponent,
+  UsersListComponent,
+  HeaderAdminComponent,
+  AdminbooksListComponent,
+  AdminbookEditComponent,
+  LoginAdminComponent,
+  AddBookComponent,
+  
   ],
   imports: [
     BrowserModule,
