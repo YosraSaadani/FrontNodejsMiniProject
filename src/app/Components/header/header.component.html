@@ -10,7 +10,7 @@
             <ul class="header-links pull-right">
                
                 
-                <li><div class="dropdown" >
+                <li><div class="dropdown" *ngIf="isUserConnected">
                    
                    <span data-bs-toggle="dropdown" class="accoount"> <i class="fa fa-user-o"></i> My Account</span>
                     <ul class="dropdown-menu">
@@ -19,7 +19,7 @@
                       <li><a class="dropdown-item" style="color: black;" (click)="logout()">Logout</a></li>
                     </ul>
                   </div>
-                  <span  class="accoount" routerLink="/login" > <i class="fa fa-user-o"></i> Login</span>
+                  <span *ngIf="!isUserConnected"  class="accoount" routerLink="/login" > <i class="fa fa-user-o"></i> Login</span>
                 </li>
             </ul>
         </div>
@@ -63,7 +63,7 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a >
+                            <a [routerLink]="isUserConnected ? '/favorite' : '/login'">
                                 <i class="fa fa-heart"></i>
                                 <span>Your Wishlist</span>
                               
