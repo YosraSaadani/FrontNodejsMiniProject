@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import {  Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -39,6 +40,9 @@ export class LoginUserComponent implements OnInit {
         
       
         
+      },
+      (error:HttpErrorResponse)=>{
+        alert(error.error.message)
       }
     )
   }

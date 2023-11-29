@@ -9,6 +9,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from 'src/app/Services/user.service';
 import { LoanService } from 'src/app/Services/loan.service';
 import { Loan } from 'src/app/Entities/loan';
+import { FavoriteService } from 'src/app/Services/favorite.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-book-details',
@@ -19,6 +21,7 @@ export class BookDetailsComponent implements OnInit {
 
   constructor(private bookService: BookService, private activatedRoute: ActivatedRoute
     , private reviewService: ReviewService,private fb:FormBuilder ,
+    private serviceFavorite:FavoriteService,
     private loanService:LoanService
     ) { }
   bookId: string = "";
@@ -37,6 +40,23 @@ initForm()
     
   });
 }
+addToFavorite(id:string){
+  this.serviceFavorite.getFavoriteByUserId(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']).subscribe(
+    data=>{
+      
+      this.serviceFavorite.addBookToFavorite(data._id,{book:id}).subscribe(
+        data=>{
+         alert("book added to favorite");
+        },
+        (error:HttpErrorResponse)=>{
+          alert(error.error.message)
+        }
+      )
+      
+    }
+  )
+  
+}
 
 getRatingArray(rating: number): number[] {
   rating=Math.round(rating);
@@ -52,7 +72,12 @@ addLoan(id:string){
     this.loanService.createLoan(this.loan).subscribe(
     (data:any)=>{
       console.log(data);
+      alert("loan added");
+    },
+    (error:HttpErrorResponse)=>{
+      alert(error.error.message)
     }
+
   )
 }
 

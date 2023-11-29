@@ -54,6 +54,7 @@ export class FavoriteService {
     return this.http.put<any>(`${apiUrl}/addBook/${id}`, body,{headers:reqHeader});
   }
 
+  
   getFavoriteByUserId(id: string): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -63,10 +64,12 @@ export class FavoriteService {
   }
 
   removeBookFromFavorite(id: string, body: any): Observable<any> {
-    var reqHeader = new HttpHeaders({
+    const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
     });
-    return this.http.put<any>(`${apiUrl}/removeBook/${id}`, body,{headers:reqHeader});
+  
+    return this.http.put<any>(`${apiUrl}/removeBook/${id}`, {}, { headers: reqHeader, params: body });
   }
+  
 }

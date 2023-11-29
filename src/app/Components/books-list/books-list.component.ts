@@ -1,8 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Book } from 'src/app/Entities/book';
+import { Loan } from 'src/app/Entities/loan';
 import { BookService } from 'src/app/Services/book.service';
 import { FavoriteService } from 'src/app/Services/favorite.service';
+import { LoanService } from 'src/app/Services/loan.service';
 
 @Component({
   selector: 'app-books-list',
@@ -12,9 +15,11 @@ import { FavoriteService } from 'src/app/Services/favorite.service';
 export class BooksListComponent implements OnInit {
   jwt=new JwtHelperService();
   selectedGenres: string[] = [];
-  constructor(private bookService:BookService,private serviceFavorite:FavoriteService) { }
+  constructor(private bookService:BookService,private serviceFavorite:FavoriteService,
+    private loanService:LoanService) { }
 books:Book[]=[];
 booksParGenre:Book[]=[];
+loan:Loan=(new Loan(new Date(),new Date(),'',''));
 
  bookGenres = [
   'Fiction',
@@ -64,7 +69,10 @@ this.bookService.getAllBooks().subscribe((data:Book[])=>{
         
         this.serviceFavorite.addBookToFavorite(data._id,{book:id}).subscribe(
           data=>{
-           
+           alert("book added to favorite");
+          },
+          (error:HttpErrorResponse)=>{
+            alert(error.error.message)
           }
         )
         
@@ -106,5 +114,21 @@ this.bookService.getAllBooks().subscribe((data:Book[])=>{
         value === "" || book.name.toLowerCase().includes(value.toLowerCase())
       );
     }
+  }
+
+  addLoan(id:string){
+    this.loan.book=id;
+    this.loan.user=this.jwt.decodeToken(localStorage.getItem('token')!)['_id'];
+    this.loan.loanDate=new Date();
+    this.loan.returnDate = new Date();
+    this.loan.returnDate.setDate(this.loan.returnDate.getDate() + 15)
+      this.loanService.createLoan(this.loan).subscribe(
+      (data:any)=>{
+        console.log(data);
+      },
+      (error:HttpErrorResponse)=>{
+        alert(error.error.message)
+      }
+    )
   }
 }

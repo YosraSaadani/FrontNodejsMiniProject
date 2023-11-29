@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/Services/user.service';
@@ -38,6 +39,9 @@ export class RegisterUserComponent implements OnInit {
         console.log(data);
         localStorage.setItem('token',data.token);
         
+      },
+      (error:HttpErrorResponse)=>{
+        alert(error.error.message)
       }
     )
   }

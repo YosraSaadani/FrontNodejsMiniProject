@@ -16,6 +16,7 @@ jwt=new JwtHelperService();
     this.loanService.deleteLoan(id).subscribe((data:any)=>{
       console.log(data);
     })
+    this.loans=this.loans.filter((loan)=>loan._id!=id);
   }
   ngOnInit(): void {
     this.loanService.getLoansByUser(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']).subscribe((data:any)=>{
