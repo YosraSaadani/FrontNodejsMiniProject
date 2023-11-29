@@ -1,0 +1,31 @@
+<!-- book-table.component.html -->
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Author</th>
+        <th scope="col">Release Date</th>
+        <!-- Add other columns for image, description, quantity, etc. -->
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>
+          <img [src]="book.image" alt="" height="200px"  width="150px" style="vertical-align: middle;">
+        </td>
+        <td>{{ book.name }}</td>
+        <td>{{ book.type }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.releaseDate | date }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" [routerLink]="['/adminDash/booksList/',book._id]">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(book._id)">Delete</button>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

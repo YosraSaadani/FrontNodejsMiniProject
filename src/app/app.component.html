@@ -1,10 +1,8 @@
-<app-header  *ngIf="!isLoginPage"></app-header>
-<router-outlet></router-outlet>
-<app-footer  *ngIf="!isLoginPage"></app-footer>
+<ng-container *ngIf="!isLoginPage">
+    <app-header *ngIf="isUser"></app-header>
+    <app-header-admin *ngIf="isAdmin"></app-header-admin>
 
-<!-- <app-header></app-header> -->
-<!-- <app-profile-user></app-profile-user> -->
-<!-- <app-modifier-password></app-modifier-password> -->
-<!-- <app-books-list></app-books-list> -->
-<!-- <app-register-user></app-register-user> -->
-<!-- <app-footer></app-footer> -->
+  </ng-container>
+  
+  <router-outlet></router-outlet>
+  <app-footer *ngIf="isUser"></app-footer>
