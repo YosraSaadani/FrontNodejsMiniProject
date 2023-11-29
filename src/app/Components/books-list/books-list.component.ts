@@ -52,6 +52,7 @@ booksParGenre:Book[]=[];
   
 ];
   ngOnInit(): void {
+    window.scrollTo(0, 0);
 this.bookService.getAllBooks().subscribe((data:Book[])=>{
   this.books=data;
   this.booksParGenre=this.books;

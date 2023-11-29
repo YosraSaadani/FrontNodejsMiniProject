@@ -14,6 +14,7 @@ export class FavoriteBooksComponent implements OnInit {
   jwt=new JwtHelperService();
 favoriteList!:any;
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.serviceFavorite.getFavoriteByUserId(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']).subscribe(
       data=>{
         this.favoriteList=data;
