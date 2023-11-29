@@ -1,6 +1,6 @@
-<app-header></app-header>
+<app-header  *ngIf="!isLoginPage"></app-header>
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+<app-footer  *ngIf="!isLoginPage"></app-footer>
 
 <!-- <app-header></app-header> -->
 <!-- <app-profile-user></app-profile-user> -->

@@ -1,28 +1,31 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserConnectedService } from 'src/app/Services/user-connected.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router,private cdr: ChangeDetectorRef) { }
-isConnected!:boolean;
-  ngOnInit(): void {
-    if(localStorage.getItem('token')!=null){
-      this.isConnected=true;
-    }
-    else{
-      this.isConnected=false;
-    }
+  constructor(private router:Router,private userService: UserConnectedService) { }
+  isUserConnected: boolean = false;
+  ngOnInit() {
+    this.userService.userConnected$.subscribe((status) => {
+      this.isUserConnected = status;
+      
+      
+    });
   }
 
   logout(){
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-    this.cdr.detectChanges();
+    console.log('Logout method called');
+  localStorage.removeItem('token');
+  this.userService.setUserConnected(false);
+  this.router.navigate(['/login']);
+    
     
   }
 
