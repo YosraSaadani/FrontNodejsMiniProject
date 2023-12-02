@@ -1,5 +1,7 @@
 <!-- user-table.component.html -->
-<table class="table" style="margin: 50px; width: 90%;">
+<h3>Users list</h3>
+<div class="table-container">
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">First Name</th>
@@ -13,12 +15,12 @@
       <tr *ngFor="let user of users">
         <td>{{ user.firstname }}</td>
         <td>{{ user.lastname }}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.birthDate | date}}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.birthDate | date }}</td>
         <td>
-          <button class="btn btn-sm btn-danger" (click)="delete(user._id)">Delete</button>
+          <i class="fa-solid fa-trash" (click)="delete(user._id)" style="color: #d00000;"></i>
         </td>
       </tr>
     </tbody>
   </table>
-  
+</div>
