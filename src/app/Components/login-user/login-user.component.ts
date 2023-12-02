@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { UserConnectedService } from 'src/app/Services/user-connected.service';
 
 import { UserService } from 'src/app/Services/user.service';
-
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-login-user',
@@ -34,8 +34,8 @@ export class LoginUserComponent implements OnInit {
     this.serviceUser.loginUser(this.userForm.value).subscribe(
       data=>{
         console.log(data);
-        localStorage.setItem('token',data.token);
-        localStorage.setItem('role',data.user.role);
+        Cookies.set('token',data.token);
+        Cookies.set('role',data.user.role);
         this.userConnected.setUserConnected(true);
         this.router.navigate(['/books']);  
         

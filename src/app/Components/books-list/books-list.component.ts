@@ -6,6 +6,8 @@ import { Loan } from 'src/app/Entities/loan';
 import { BookService } from 'src/app/Services/book.service';
 import { FavoriteService } from 'src/app/Services/favorite.service';
 import { LoanService } from 'src/app/Services/loan.service';
+import Cookies from 'js-cookie';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-books-list',
@@ -16,7 +18,7 @@ export class BooksListComponent implements OnInit {
   jwt=new JwtHelperService();
   selectedGenres: string[] = [];
   constructor(private bookService:BookService,private serviceFavorite:FavoriteService,
-    private loanService:LoanService) { }
+    private loanService:LoanService,private router:Router) { }
 books:Book[]=[];
 booksParGenre:Book[]=[];
 loan:Loan=(new Loan(new Date(),new Date(),'',''));
@@ -64,20 +66,31 @@ this.bookService.getAllBooks().subscribe((data:Book[])=>{
   })
   }
   addToFavorite(id:string){
-    this.serviceFavorite.getFavoriteByUserId(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']).subscribe(
+    if(Cookies.get('token')!=null)
+    { this.serviceFavorite.createFavorite({user:this.jwt.decodeToken(Cookies.get('token')!)['_id'],book:id}).subscribe(
       data=>{
-        
-        this.serviceFavorite.addBookToFavorite(data._id,{book:id}).subscribe(
-          data=>{
-           alert("book added to favorite");
-          },
-          (error:HttpErrorResponse)=>{
-            alert(error.error.message)
-          }
-        )
-        
+        alert("book added to favorite");
+      },
+      (error:HttpErrorResponse)=>{
+        alert(error.error.message)
       }
-    )
+    )}
+    else{
+      alert("You must login first");
+    }
+   
+         
+        
+        // else{ this.serviceFavorite.addBookToFavorite(data._id,{book:id}).subscribe(
+        //   data=>{
+        //    alert("book added to favorite");
+        //   },
+        //   (error:HttpErrorResponse)=>{
+        //     alert(error.error.message)
+        //   }
+        // )}
+
+
     
   }
 
@@ -117,18 +130,23 @@ this.bookService.getAllBooks().subscribe((data:Book[])=>{
   }
 
   addLoan(id:string){
+    if(Cookies.get('token')!=null){
     this.loan.book=id;
-    this.loan.user=this.jwt.decodeToken(localStorage.getItem('token')!)['_id'];
+    this.loan.user=this.jwt.decodeToken(Cookies.get('token')!)['_id'];
     this.loan.loanDate=new Date();
     this.loan.returnDate = new Date();
     this.loan.returnDate.setDate(this.loan.returnDate.getDate() + 15)
       this.loanService.createLoan(this.loan).subscribe(
       (data:any)=>{
         console.log(data);
+        alert("Loan added");
       },
       (error:HttpErrorResponse)=>{
         alert(error.error.message)
       }
     )
+    }else{
+      alert("You must login first");
+    }
   }
 }

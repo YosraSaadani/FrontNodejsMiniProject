@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Favorite } from '../Entities/favorite';
 import { Observable } from 'rxjs';
+import Cookies from 'js-cookie';
 const apiUrl = 'http://localhost:3000/favorites';
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class FavoriteService {
   getFavoriteById(id: string): Observable<Favorite> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.get<Favorite>(`${apiUrl}/${id}`,{headers:reqHeader});
   }
@@ -25,7 +26,7 @@ export class FavoriteService {
   createFavorite(body: any): Observable<Favorite> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.post<Favorite>(apiUrl, body,{headers:reqHeader});
   }
@@ -33,7 +34,7 @@ export class FavoriteService {
   updateFavorite(id: string, body: any): Observable<Favorite> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.put<Favorite>(`${apiUrl}/${id}`, body,{headers:reqHeader});
   }
@@ -41,35 +42,35 @@ export class FavoriteService {
   deleteFavorite(id: string): Observable<Favorite> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.delete<Favorite>(`${apiUrl}/${id}`,{headers:reqHeader});
   }
 
-  addBookToFavorite(id: string, body: any): Observable<any> {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    });
-    return this.http.put<any>(`${apiUrl}/addBook/${id}`, body,{headers:reqHeader});
-  }
+  // addBookToFavorite(id: string, body: any): Observable<any> {
+  //   var reqHeader = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: 'Bearer ' + localStorage.getItem('token'),
+  //   });
+  //   return this.http.put<any>(`${apiUrl}/addBook/${id}`, body,{headers:reqHeader});
+  // }
 
   
   getFavoriteByUserId(id: string): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.get<any>(`${apiUrl}/user/${id}`,{headers:reqHeader});
   }
 
-  removeBookFromFavorite(id: string, body: any): Observable<any> {
+  removeBookFromFavorite(userid: string, bookid: string): Observable<any> {
     const reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Authorization': `Bearer ${Cookies.get('token')}`,
     });
   
-    return this.http.put<any>(`${apiUrl}/removeBook/${id}`, {}, { headers: reqHeader, params: body });
+    return this.http.delete<any>(`${apiUrl}/removeBook/${userid}/${bookid}`, { headers: reqHeader });
   }
   
 }

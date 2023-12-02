@@ -31,7 +31,7 @@
 								
 							</div>
 						</div>
-						<a class="review-link" href="#">{{reviews.length}} Review(s) | Add your review</a>
+						<a class="review-link" >{{reviews.length}} Review(s) </a>
 					</div>
 					<div style="margin: 10px;">
 
@@ -205,7 +205,7 @@
 								<!-- /Reviews -->
 
 								<!-- Review Form -->
-								<div class="col-md-4">
+								<div class="col-md-4" id="rviwForm">
 									<div id="review-form" *ngIf="reviewForm">
 										<form class="review-form" [formGroup]="reviewForm"
 											(ngSubmit)="addReview(book._id)">

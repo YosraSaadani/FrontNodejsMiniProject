@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-header-admin',
@@ -11,8 +12,8 @@ export class HeaderAdminComponent implements OnInit {
   constructor(private router:Router) { }
   logout()
   {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    Cookies.remove('token');
+    Cookies.remove('role');
     this.router.navigate(['/login']);
 
   }

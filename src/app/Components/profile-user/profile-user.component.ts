@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { User } from 'src/app/Entities/user';
 import { UserService } from 'src/app/Services/user.service';
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-profile-user',
@@ -17,10 +18,14 @@ export class ProfileUserComponent implements OnInit {
   constructor(private serviceUser: UserService,private fb:FormBuilder,private router:Router ) { }
 jwt=new JwtHelperService();
   ngOnInit(): void {
-    this.serviceUser.getUserById(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']).subscribe(
+    if(Cookies.get('token')==null){
+      this.router.navigate(['/login']);
+    }
+    this.serviceUser.getUserById(this.jwt.decodeToken(Cookies.get('token')!)['_id']).subscribe(
       data=>{
         this.user=data;
-        console.log(this.user);
+        console.log(this.user.user.birthDate);
+        const parsedBirthDate = new Date(this.user.user.birthDate);
         this.userForm=this.fb.group({
           email:[this.user.user.email,[Validators.required,  Validators.pattern(/^\S+@\S+\.\S+$/)]],
           
@@ -28,7 +33,7 @@ jwt=new JwtHelperService();
           lastname:[this.user.user.lastname,[Validators.required, Validators.minLength(3)]],
           adresse:[this.user.user.adresse,[Validators.required, Validators.minLength(3)]],
           phoneNumber:[this.user.user.phoneNumber,[Validators.required, Validators.minLength(8),Validators.maxLength(8),Validators.pattern(/^[0-9]*$/)]],
-          birthDate:[this.user.user.birthDate,[Validators.required]],
+          birthDate:[parsedBirthDate.toISOString().split('T')[0],[Validators.required]],
           cin:[this.user.user.cin,[Validators.required, Validators.minLength(8),Validators.maxLength(8),Validators.pattern(/^[0-9]*$/)]],
           university:[this.user.user.university,[Validators.required, Validators.minLength(3)]],
           sex:[this.user.user.sex,[Validators.required]],
@@ -80,9 +85,11 @@ jwt=new JwtHelperService();
 
 
   modifier(){
-    this.serviceUser.updateUser(this.jwt.decodeToken(localStorage.getItem('token')!)['_id'],this.userForm.value).subscribe(
+    this.serviceUser.updateUser(this.jwt.decodeToken(Cookies.get('token')!)['_id'],this.userForm.value).subscribe(
       data=>{
         console.log(data);
+
+        alert("profile updated");
         this.router.navigate(['/books']);
         
         

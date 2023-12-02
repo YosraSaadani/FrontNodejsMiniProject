@@ -4,4 +4,4 @@
   </ng-container>
   
   <router-outlet></router-outlet>
-  <app-footer *ngIf="role=='user'"></app-footer>
+  <app-footer *ngIf="role=='user' && !isLoginPage "></app-footer>

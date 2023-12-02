@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Review } from '../Entities/review';
+import Cookies from 'js-cookie';
 const apiUrl = 'http://localhost:3000/reviews'; // Adjust the URL based on your backend API
 
 @Injectable({
@@ -14,7 +15,7 @@ export class ReviewService {
   addReview(body: Review): Observable<Review> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.post<Review>(apiUrl, body,{headers:reqHeader});
   }

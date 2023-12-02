@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../Entities/user';
 import { Observable } from 'rxjs';
+import Cookies from 'js-cookie';
 const url="http://localhost:3000/users";
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UserService {
   getAllUsers():Observable<User[]>{
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.get<User[]>(url,{headers:reqHeader});
   }
@@ -21,7 +22,7 @@ export class UserService {
   getUserById(id: string): Observable<User> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.get<User>(`${url}/${id}`,{headers:reqHeader});
   }
@@ -33,7 +34,7 @@ export class UserService {
   updateUser(id: string, body: any): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.put<any>(`${url}/${id}`, body,{headers:reqHeader});
   }
@@ -41,7 +42,7 @@ export class UserService {
   deleteUser(id: string): Observable<User> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.delete<User>(`${url}/${id}`,{headers:reqHeader});
     
@@ -54,7 +55,7 @@ export class UserService {
   changePassword(id: string, body: any): Observable<any> {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
+      Authorization: 'Bearer ' + Cookies.get('token'),
     });
     return this.http.put<any>(`${url}/changepass/${id}`, body,{headers:reqHeader});
   }

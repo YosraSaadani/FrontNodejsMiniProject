@@ -11,6 +11,7 @@ import { LoanService } from 'src/app/Services/loan.service';
 import { Loan } from 'src/app/Entities/loan';
 import { FavoriteService } from 'src/app/Services/favorite.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-book-details',
@@ -41,22 +42,19 @@ initForm()
   });
 }
 addToFavorite(id:string){
-  console.log(id);
-  console.log(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']);
-  this.serviceFavorite.getFavoriteByUserId(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']).subscribe(
+  if(Cookies.get('token')!=null)
+  { this.serviceFavorite.createFavorite({user:this.jwt.decodeToken(Cookies.get('token')!)['_id'],book:id}).subscribe(
     data=>{
-      
-      this.serviceFavorite.addBookToFavorite(data._id,{book:id}).subscribe(
-        data=>{
-         alert("book added to favorite");
-        },
-        (error:HttpErrorResponse)=>{
-          alert(error.error.message)
-        }
-      )
-      
+      alert("book added to favorite");
+    },
+    (error:HttpErrorResponse)=>{
+      alert(error.error.message)
     }
-  )
+  )}
+  else{
+    alert("You must login first");
+  }
+ 
   
 }
 
@@ -66,21 +64,24 @@ getRatingArray(rating: number): number[] {
 }
 
 addLoan(id:string){
-  this.loan.book=id;
-  this.loan.user=this.jwt.decodeToken(localStorage.getItem('token')!)['_id'];
-  this.loan.loanDate=new Date();
-  this.loan.returnDate = new Date();
-  this.loan.returnDate.setDate(this.loan.returnDate.getDate() + 15)
-    this.loanService.createLoan(this.loan).subscribe(
-    (data:any)=>{
-      console.log(data);
-      alert("loan added");
-    },
-    (error:HttpErrorResponse)=>{
-      alert(error.error.message)
+  if(Cookies.get('token')!=null){
+    this.loan.book=id;
+    this.loan.user=this.jwt.decodeToken(Cookies.get('token')!)['_id'];
+    this.loan.loanDate=new Date();
+    this.loan.returnDate = new Date();
+    this.loan.returnDate.setDate(this.loan.returnDate.getDate() + 15)
+      this.loanService.createLoan(this.loan).subscribe(
+      (data:any)=>{
+        console.log(data);
+        alert("Loan added");
+      },
+      (error:HttpErrorResponse)=>{
+        alert(error.error.message)
+      }
+    )
+    }else{
+      alert("You must login first");
     }
-
-  )
 }
 
 
@@ -88,12 +89,13 @@ addReview(id:string){
   this.review.comment=this.reviewForm.value.comment;
 this.review.rating=this.reviewForm.value.rating;
   this.review.book=id;
-this.review.user=this.jwt.decodeToken(localStorage.getItem('token')!)['_id'];
+this.review.user=this.jwt.decodeToken(Cookies.get('token')!)['_id'];
 
 console.log(this.review)
   this.reviewService.addReview(this.review).subscribe(
     (data:Review)=>{
       console.log(data);
+      this.reviews.length++;
       this.bookService.getBooksReviews(id).subscribe(
         (data:any)=>{
           this.reviews=data;

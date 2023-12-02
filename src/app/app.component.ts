@@ -5,6 +5,7 @@ import { Book } from './Entities/book';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from './Services/user.service';
+import Cookies from 'js-cookie';
 
 @Component({
   selector: 'app-root',
@@ -30,15 +31,17 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isLoginPage = this.activatedRoute.snapshot.firstChild?.routeConfig?.path === 'login';
+       
+        this.isLoginPage = this.activatedRoute.snapshot.firstChild?.routeConfig?.path === 'login' ||
+        this.activatedRoute.snapshot.firstChild?.routeConfig?.path === 'register';
         this.isLoginAdminPage = this.activatedRoute.snapshot.firstChild?.routeConfig?.path === 'loginAdmin';
-        this.role=localStorage.getItem('role')!;
+        this.role=Cookies.get('role')!;
 
       }
     });
 
-    if (localStorage.getItem('token') != null) {
-      this.userService.getUserById(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']).subscribe((data: any) => {
+    if (Cookies.get('token') != null) {
+      this.userService.getUserById(this.jwt.decodeToken(Cookies.get('token')!)['_id']).subscribe((data: any) => {
         this.currentUser = data;
       
       });

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserConnectedService } from 'src/app/Services/user-connected.service';
-
+import Cookies from 'js-cookie';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     console.log('Logout method called');
-  localStorage.removeItem('token');
+  Cookies.remove('token');
   this.userService.setUserConnected(false);
   this.router.navigate(['/login']);
     

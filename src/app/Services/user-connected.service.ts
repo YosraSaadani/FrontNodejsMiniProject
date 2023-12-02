@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import Cookies from 'js-cookie';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class UserConnectedService {
 
   constructor() {
     // Check if the user has a token during service initialization
-    const userToken = localStorage.getItem('token');
+    const userToken = Cookies.get('token');
     this.setUserConnected(!!userToken);
   }
 
