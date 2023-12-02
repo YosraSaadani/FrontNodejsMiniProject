@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookService } from 'src/app/Services/book.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adminbooks-list',
@@ -17,6 +18,12 @@ delete(id:string){
   if(test){
     this.bookService.deleteBook(id).subscribe((data:any)=>{
       this.books=this.books.filter((book)=>book._id!=id);
+      Swal.fire({
+        icon: 'success',
+        title: 'Book deleted successfully',
+        showConfirmButton: false,
+        timer: 1500
+      });  
     })
   }
 

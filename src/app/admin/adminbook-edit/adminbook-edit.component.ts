@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Book } from 'src/app/Entities/book';
 import { BookService } from 'src/app/Services/book.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adminbook-edit',
@@ -56,8 +57,12 @@ currentBook!:any;
 
       this.bookService.updateBook(this.bookId,modifiedBook).subscribe((data) => {
         console.log(data);
-        alert("book updated !")
-      });
+        Swal.fire({
+          icon: 'success',
+          title: 'Book updated successfully',
+          showConfirmButton: false,
+          timer: 1500
+        });      });
 
       // Emit the modified book object to the parent component
     }

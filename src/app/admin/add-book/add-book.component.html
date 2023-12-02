@@ -6,16 +6,23 @@
         <label for="name" class="form-label">Name:</label>
         <input type="text" class="form-control" id="name" formControlName="name">
       </div>
-
+      <div *ngIf="name?.hasError('required') && name?.touched" style="color: red; font-weight: bold;">
+        Name is required.
+        </div>
       <div class="mb-3">
         <label for="type" class="form-label">Type:</label>
         <input type="text" class="form-control" id="type" formControlName="type">
       </div>
-
+      <div *ngIf="type?.hasError('required') && type?.touched" style="color: red; font-weight: bold;">
+        Type is required.
+        </div>
       <div class="mb-3">
         <label for="author" class="form-label">Author:</label>
         <input type="text" class="form-control" id="author" formControlName="author">
       </div>
+      <div *ngIf="author?.hasError('required') && author?.touched" style="color: red; font-weight: bold;">
+        Author is required.
+        </div>
     </div>
 
     <div>
@@ -23,21 +30,31 @@
         <label for="releaseDate" class="form-label">Release Date:</label>
         <input type="date" class="form-control" id="releaseDate" formControlName="releaseDate">
       </div>
-
+      <div *ngIf="releaseDate?.hasError('required') && releaseDate?.touched" style="color: red; font-weight: bold;">
+        Release Date is required.
+        </div>
       <div class="mb-3">
         <label for="image" class="form-label">Image URL:</label>
         <input type="text" class="form-control" id="image" formControlName="image">
       </div>
-
+      <div *ngIf="image?.hasError('required') && image?.touched" style="color: red; font-weight: bold;">
+        Image is required.
+        </div>
       <div class="mb-3">
         <label for="quantity" class="form-label">Quantity:</label>
         <input type="number" class="form-control" id="quantity" formControlName="quantity">
       </div>
+      <div *ngIf="quantity?.hasError('required') && quantity?.touched" style="color: red; font-weight: bold;">
+        Quantity is required.
+        </div>
     </div>
 
     <div class="mb-6" style="grid-column: span 2;">
       <label for="description" class="form-label">Description:</label>
       <textarea class="form-control" id="description" formControlName="description"></textarea>
+      <div *ngIf="description?.hasError('required') && description?.touched" style="color: red; font-weight: bold;">
+        Description is required.
+        </div>
       <button type="submit" class="btn btn-primary" style="margin-top:20px; width: 100%; font-weight: bold; background-color: #a2a8d3; color: black; border-color: transparent;">Add Book</button>
 
     </div>

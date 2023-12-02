@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/Services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users-list',
@@ -18,6 +19,13 @@ delete(id:string){
   if(test){
     this.userService.deleteUser(id).subscribe((data:any)=>{
       this.users=this.users.filter((user)=>user._id!=id);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'User deleted successfully',
+        showConfirmButton: false,
+        timer: 1500
+      });  
     })
   }
  
