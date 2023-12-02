@@ -41,6 +41,8 @@ initForm()
   });
 }
 addToFavorite(id:string){
+  console.log(id);
+  console.log(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']);
   this.serviceFavorite.getFavoriteByUserId(this.jwt.decodeToken(localStorage.getItem('token')!)['_id']).subscribe(
     data=>{
       
