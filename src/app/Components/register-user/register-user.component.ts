@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FavoriteService } from 'src/app/Services/favorite.service';
 import { UserService } from 'src/app/Services/user.service';
 import Cookies from 'js-cookie';
+import { UserConnectedService } from 'src/app/Services/user-connected.service';
 
 @Component({
   selector: 'app-register-user',
@@ -15,6 +16,7 @@ export class RegisterUserComponent implements OnInit {
 
   userForm!:FormGroup;
   constructor(private serviceUser: UserService,private fb:FormBuilder,private router:Router,
+    private userConnected:UserConnectedService
     ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,7 @@ export class RegisterUserComponent implements OnInit {
         console.log(data);
         Cookies.set('token',data.token);
         Cookies.set('role',data.user.role);
-      
+        this.userConnected.setUserConnected(true);
         this.router.navigate(['/books']);
 
 
