@@ -1,4 +1,4 @@
-<ng-container *ngIf="!isLoginPage">
+<ng-container *ngIf="!isLoginPage && !isLoginAdminPage">
     <app-header *ngIf="role==='user'"></app-header>
 <!-- <app-header-admin *ngIf="role==='admin'"></app-header-admin> -->
   </ng-container>

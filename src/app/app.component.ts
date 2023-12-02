@@ -14,6 +14,7 @@ import { UserService } from './Services/user.service';
 export class AppComponent implements OnInit {
   books: Book[] = [];
   isLoginPage: boolean = false;
+  isLoginAdminPage: boolean = false;
  role!:string;
   jwt = new JwtHelperService();
   currentUser: any;
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isLoginPage = this.activatedRoute.snapshot.firstChild?.routeConfig?.path === 'login';
+        this.isLoginAdminPage = this.activatedRoute.snapshot.firstChild?.routeConfig?.path === 'loginAdmin';
         this.role=localStorage.getItem('role')!;
 
       }

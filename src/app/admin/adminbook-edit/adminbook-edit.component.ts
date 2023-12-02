@@ -13,6 +13,7 @@ export class AdminbookEditComponent implements OnInit {
   bookId: string = "";
   book: any;
 bookForm!:FormGroup;
+currentBook!:any;
   constructor(private bookService: BookService, private activatedRoute: ActivatedRoute,private formBuilder: FormBuilder) {
     this.bookForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -55,6 +56,7 @@ bookForm!:FormGroup;
 
       this.bookService.updateBook(this.bookId,modifiedBook).subscribe((data) => {
         console.log(data);
+        alert("book updated !")
       });
 
       // Emit the modified book object to the parent component
@@ -66,6 +68,7 @@ bookForm!:FormGroup;
     this.activatedRoute.params.subscribe((data) => {
       this.bookId = data['id'];
       console.log(this.bookId);
+      this.bookService.getBookById(this.bookId).subscribe((data)=>this.currentBook=data)
       this.bookService.getBookById(this.bookId).subscribe((data) => {
         this.book = data;
         console.log(this.book);

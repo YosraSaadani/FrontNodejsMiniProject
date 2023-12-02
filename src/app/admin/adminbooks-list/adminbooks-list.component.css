@@ -1,0 +1,41 @@
+/* book-table.component.css */
+
+  table{
+    border-radius: 5px;
+    border-color: black;
+    border-collapse: collapse;
+    background-color: #e7eaf6;
+    width: 70%; 
+      color: rgb(0, 0, 0);
+      border-radius: 20px; 
+        text-align: center;
+        margin: 20px auto; /* Center the table horizontally */
+
+}
+  
+tr{
+    padding: 10px;
+}
+th{text-align: center;
+    color:#38598b;
+    font-weight: bold;
+    
+    }
+    td{
+        font-weight: bold;
+    }
+    
+    h3{
+        text-align: center;
+        color: #38598b;
+        font-weight: bold;
+        margin-top: 50px;
+    }
+  
+  img {
+    display: block;
+    margin: auto;
+  }
+  
+ 
+  

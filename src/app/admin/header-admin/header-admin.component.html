@@ -3,18 +3,18 @@
 
 
 </header>
-<nav id="navigation">
+<nav id="navigation" style="background-color: #113f67;">
     <!-- container -->
     <div class="container">
         <!-- responsive-nav -->
         <div id="responsive-nav">
             <!-- NAV -->
-            <ul class="main-nav nav navbar-nav">
-                <li ><a routerLink="/adminDash/users" routerLinkActive="active">Users</a></li>
-                <li><a routerLink="/adminDash/booksList" routerLinkActive="active">Books</a></li>
-                <li><a routerLink="/adminDash/addBook" routerLinkActive="active">Add Book</a></li>
+            <ul class="main-nav nav navbar-nav" style="font-weight: bold; color: aliceblue !important;  font-size: 16px;">
+                <li  ><a routerLink="/adminDash/users" routerLinkActive="active2"><b>Users</b></a></li>
+                <li><a routerLink="/adminDash/booksList" routerLinkActive="active2"><b>Books</b></a></li>
+                <li><a routerLink="/adminDash/addBook" routerLinkActive="active2"><b>Add Book</b></a></li>
 
-                <li style="float: right !important; " (click)="logout()"> <a>Logout</a></li>
+                <li style="float: right !important; " (click)="logout()"> <a>  <b>Logout</b></a></li>
             </ul>
             <!-- /NAV -->
         </div>
