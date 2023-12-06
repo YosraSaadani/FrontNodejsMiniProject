@@ -6,6 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from 'src/app/Entities/user';
 import { UserService } from 'src/app/Services/user.service';
 import Cookies from 'js-cookie';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile-user',
@@ -93,6 +94,9 @@ jwt=new JwtHelperService();
         this.router.navigate(['/books']);
         
         
+      },
+      (error:HttpErrorResponse)=>{
+        alert(error.error.message)
       }
     )
   }

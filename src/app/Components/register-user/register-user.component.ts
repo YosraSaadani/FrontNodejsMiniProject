@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FavoriteService } from 'src/app/Services/favorite.service';
 import { UserService } from 'src/app/Services/user.service';
@@ -19,26 +19,63 @@ export class RegisterUserComponent implements OnInit {
     private userConnected:UserConnectedService
     ) { }
 
+   
+
   ngOnInit(): void {
     this.userForm=this.fb.group({
-      email:[''],
-      password:[''],
-      firstname:[''],
-      lastname:[''],
-      adresse:[''],
-      phoneNumber:[''],
+      email:['',Validators.required,  Validators.pattern(/^\S+@\S+\.\S+$/)],
+      password:['',Validators.required],
+      firstname:['',Validators.required],
+      lastname:['',Validators.required],
+      adresse:['',Validators.required],
+      phoneNumber:['',Validators.required],
       role:[''],
-      sex:[''],
-      birthDate:[''],
-      cin:[''],
-      university:[''],
+      sex:['',Validators.required],
+      birthDate:['',Validators.required],
+      cin:['',Validators.required],
+      university:['',Validators.required],
 
 
 
     });
   }
+  get email() {
+    return this.userForm.get('email');
+  }
 
+  get password() {
+    return this.userForm.get('password');
+  }
+  get firstname() {
+    return this.userForm.get('firstname');
+  }
+  get lastname() {
+    return this.userForm.get('lastname');
+  }
+  get adresse() {
+    return this.userForm.get('adresse');
+  }
+  get phoneNumber() {
+    return this.userForm.get('phoneNumber');
+  }
+
+  get sex() {
+    return this.userForm.get('sex');}
+  get birthDate() {
+    return this.userForm.get('birthDate');}
+  get cin() {
+    return this.userForm.get('cin');}
+  get university() {
+    return this.userForm.get('university');}
+  get role() {
+    return this.userForm.get('role');}
+    
   register(){
+    if(this.userForm.invalid){
+      alert("Please fill in all the fields")
+      return;
+    }
+
     this.userForm.patchValue({ role: 'user' });
     this.serviceUser.createUser(this.userForm.value).subscribe(
       data=>{

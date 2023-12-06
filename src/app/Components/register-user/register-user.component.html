@@ -10,30 +10,54 @@
 				<div class="login__field">
 					
 					<input type="text" class="login__input" placeholder="FirstName" formControlName="firstname">
+					<div *ngIf="firstname?.hasError('required') && firstname?.touched" style="color: red;">
+						Firstname is required.
+					  </div>
 				</div>
 				<div class="login__field">
 					
 					<input type="text" class="login__input" placeholder="Lastname" formControlName="lastname">
+					<div *ngIf="lastname?.hasError('required') && lastname?.touched" style="color: red;">
+						Lastname is required.
+					  </div>
 				</div>
 			</div>
 			<div class="login__row">
                 <div class="login__field">
 					
 					<input type="text" class="login__input" placeholder="Email" formControlName="email">
+					<div *ngIf="email?.hasError('required') && email?.touched" style="color: red;">
+						Email is required.
+					  </div>
+					  <div *ngIf="email?.hasError('pattern') && !email?.hasError('required') && email?.touched" style="color: red;">
+						Please enter a valid email address.
+					  </div>
 				</div>
                 <div class="login__field">
 				
 					<input type="password" class="login__input" placeholder="Password" formControlName="password">
+					<div *ngIf="password?.hasError('required') && password?.touched" style="color: red;">
+						Password is required.
+					  </div>
+					  <div *ngIf="password?.hasError('minlength') && !password?.hasError('required') && password?.touched" style="color: red;">
+						Password must be at least 6 characters.
+					  </div>
 				</div>
 			</div>
 			<div class="login__row">
                 <div class="login__field">
 					
 					<input type="date" class="login__input" placeholder="Lastname" formControlName="birthDate">
+					<div *ngIf="birthDate?.hasError('required') && birthDate?.touched" style="color: red;">
+						birthDate is required.
+					  </div>
 				</div>
                 <div class="login__field">
 					
 					<input type="text" class="login__input" placeholder="Adresse" formControlName="adresse">
+					<div *ngIf="adresse?.hasError('required') && adresse?.touched" style="color: red;">
+						Adresse is required.
+					  </div>
 				</div>
 				</div>
 				<div class="login__row">
@@ -43,16 +67,26 @@
 						  <option value="male" selected>Male</option>
 						  <option value="female">Female</option>
 						</select>
+
+					  </div>
+					  <div *ngIf="sex?.hasError('required') && sex?.touched" style="color: red;">
+						sex is required.
 					  </div>
                 <div class="login__field">
 					
 					<input type="text" class="login__input" placeholder="University" formControlName="university">
+					<div *ngIf="university?.hasError('required') && university?.touched" style="color: red;">
+						University is required.
+					  </div>
 				</div>
 				</div>
 				<div class="login__row">
                 <div class="login__field">
 				
 					<input type="text" class="login__input" placeholder="Cin" formControlName="cin">
+					<div *ngIf="cin?.hasError('required') && cin?.touched" style="color: red;">
+						Cin is required.
+					  </div>
 				</div>
                 
                 
@@ -60,6 +94,9 @@
                 <div class="login__field">
 				
 					<input type="text" class="login__input" placeholder="Phone number" formControlName="phoneNumber">
+					<div *ngIf="phoneNumber?.hasError('required') && phoneNumber?.touched" style="color: red;">
+						Phone number is required.
+					  </div>
 				</div>
 				
 				</div>

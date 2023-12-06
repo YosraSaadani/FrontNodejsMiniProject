@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserService } from 'src/app/Services/user.service';
 import Cookies from 'js-cookie';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-modifier-password',
@@ -40,9 +41,13 @@ export class ModifierPasswordComponent implements OnInit {
     this.serviceUser.changePassword(this.jwt.decodeToken(Cookies.get('token')!)['_id'],this.userForm.value).subscribe(
       data=>{
         console.log(data);
+        alert("Password changed successfully");
         
-        
+      },
+      (error:HttpErrorResponse)=>{
+        alert(error.error.message)
       }
+    
     );
   }
 
