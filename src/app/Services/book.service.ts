@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book } from '../Entities/book'; // Assuming you have a Book class
+import Cookies from 'js-cookie';
 
 const apiUrl = 'http://localhost:3000/books'; // Adjust the URL based on your backend API
 
@@ -21,15 +22,27 @@ export class BookService {
   }
 
   createBook(body: any): Observable<Book> {
-    return this.http.post<Book>(apiUrl, body);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    });
+    return this.http.post<Book>(apiUrl, body,{headers:reqHeader});
   }
 
   updateBook(id: string, body: any): Observable<Book> {
-    return this.http.put<Book>(`${apiUrl}/${id}`, body);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    });
+    return this.http.put<Book>(`${apiUrl}/${id}`, body,{headers:reqHeader});
   }
 
   deleteBook(id: string): Observable<Book> {
-    return this.http.delete<Book>(`${apiUrl}/${id}`);
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + Cookies.get('token'),
+    });
+    return this.http.delete<Book>(`${apiUrl}/${id}`,{headers:reqHeader});
   }
 
 getBooksReviews(id: string): Observable<any> {

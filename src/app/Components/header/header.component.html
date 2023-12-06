@@ -1,4 +1,4 @@
-<header *ngIf="isUserConnected">
+<header >
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
@@ -10,7 +10,7 @@
             <ul class="header-links pull-right">
                
                 
-                <li><div class="dropdown" >
+                <li><div class="dropdown" *ngIf="isUserConnected">
                    
                    <span data-bs-toggle="dropdown" class="accoount"> <i class="fa fa-user-o"></i> My Account</span>
                     <ul class="dropdown-menu">

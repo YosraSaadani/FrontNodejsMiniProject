@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
         this.activatedRoute.snapshot.firstChild?.routeConfig?.path === 'register';
         this.isLoginAdminPage = this.activatedRoute.snapshot.firstChild?.routeConfig?.path === 'loginAdmin';
         this.role=Cookies.get('role')!;
+        console.log(this.role);
 
       }
     });
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit {
     if (Cookies.get('token') != null) {
       this.userService.getUserById(this.jwt.decodeToken(Cookies.get('token')!)['_id']).subscribe((data: any) => {
         this.currentUser = data;
+       
       
       });
 

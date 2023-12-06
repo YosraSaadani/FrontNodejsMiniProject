@@ -38,6 +38,10 @@ export class ModifierPasswordComponent implements OnInit {
   }
 
   modifier(){
+    if(this.userForm.invalid){
+      alert("Please fill in all the fields")
+      return;
+    }
     this.serviceUser.changePassword(this.jwt.decodeToken(Cookies.get('token')!)['_id'],this.userForm.value).subscribe(
       data=>{
         console.log(data);

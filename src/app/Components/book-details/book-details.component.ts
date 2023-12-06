@@ -72,7 +72,7 @@ addLoan(id:string){
     this.loan.returnDate.setDate(this.loan.returnDate.getDate() + 15)
       this.loanService.createLoan(this.loan).subscribe(
       (data:any)=>{
-        console.log(data);
+        this.book.quantity--;
         alert("Loan added");
       },
       (error:HttpErrorResponse)=>{
@@ -86,6 +86,10 @@ addLoan(id:string){
 
 
 addReview(id:string){
+  if(Cookies.get('token')==null){
+    alert("You must login first");
+    return;
+  }
   this.review.comment=this.reviewForm.value.comment;
 this.review.rating=this.reviewForm.value.rating;
   this.review.book=id;
@@ -95,6 +99,7 @@ console.log(this.review)
   this.reviewService.addReview(this.review).subscribe(
     (data:Review)=>{
       console.log(data);
+      alert("Review added");
       this.reviews.length++;
       this.bookService.getBooksReviews(id).subscribe(
         (data:any)=>{

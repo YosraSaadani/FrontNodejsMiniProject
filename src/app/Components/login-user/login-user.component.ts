@@ -31,6 +31,10 @@ export class LoginUserComponent implements OnInit {
   }
 
   login(){
+    if(this.userForm.invalid){
+      alert("Please fill in all the fields")
+      return;
+    }
     this.serviceUser.loginUser(this.userForm.value).subscribe(
       data=>{
         console.log(data);
