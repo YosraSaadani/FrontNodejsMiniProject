@@ -23,17 +23,17 @@ export class RegisterUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm=this.fb.group({
-      email:['',Validators.required,  Validators.pattern(/^\S+@\S+\.\S+$/)],
-      password:['',Validators.required],
-      firstname:['',Validators.required],
-      lastname:['',Validators.required],
-      adresse:['',Validators.required],
-      phoneNumber:['',Validators.required],
+      email:['',[Validators.required,  Validators.pattern(/^\S+@\S+\.\S+$/)]],
+      password:['',[Validators.required,Validators.minLength(6)]],
+      firstname:['',[Validators.required,Validators.minLength(3)]],
+      lastname:['',[Validators.required,Validators.minLength(3)]],
+      adresse:['',[Validators.required,Validators.minLength(3)]],
+      phoneNumber:['',[Validators.required,Validators.minLength(8),Validators.maxLength(8),Validators.pattern(/^[0-9]*$/)]],
       role:[''],
-      sex:['',Validators.required],
-      birthDate:['',Validators.required],
-      cin:['',Validators.required],
-      university:['',Validators.required],
+      sex:['',[Validators.required]],
+      birthDate:['',[Validators.required ]],
+      cin:['',[Validators.required, Validators.minLength(8),Validators.maxLength(8),Validators.pattern(/^[0-9]*$/)]],
+      university:['',[Validators.required,Validators.minLength(3)]],
 
 
 

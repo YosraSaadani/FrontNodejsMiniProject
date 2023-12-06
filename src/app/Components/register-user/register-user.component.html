@@ -11,15 +11,21 @@
 					
 					<input type="text" class="login__input" placeholder="FirstName" formControlName="firstname">
 					<div *ngIf="firstname?.hasError('required') && firstname?.touched" style="color: red;">
-						Firstname is required.
-					  </div>
+						First Name is required.
+						</div>
+						<div *ngIf="firstname?.hasError('minlength') && !firstname?.hasError('required') && firstname?.touched" style="color: red;">
+						  First Name must be at least 3 characters.
+						</div>
 				</div>
 				<div class="login__field">
 					
 					<input type="text" class="login__input" placeholder="Lastname" formControlName="lastname">
 					<div *ngIf="lastname?.hasError('required') && lastname?.touched" style="color: red;">
-						Lastname is required.
-					  </div>
+						Last Name is required.
+						</div>
+						<div *ngIf="lastname?.hasError('minlength') && !lastname?.hasError('required') && lastname?.touched" style="color: red;">
+						  Last Name must be at least 3 characters.
+						</div>
 				</div>
 			</div>
 			<div class="login__row">
@@ -56,8 +62,11 @@
 					
 					<input type="text" class="login__input" placeholder="Adresse" formControlName="adresse">
 					<div *ngIf="adresse?.hasError('required') && adresse?.touched" style="color: red;">
-						Adresse is required.
-					  </div>
+						Adress is required.
+						</div>
+						<div *ngIf="adresse?.hasError('minlength') && !adresse?.hasError('required') && adresse?.touched" style="color: red;">
+						  Adress must be at least 3 characters.
+						</div>
 				</div>
 				</div>
 				<div class="login__row">
@@ -77,7 +86,10 @@
 					<input type="text" class="login__input" placeholder="University" formControlName="university">
 					<div *ngIf="university?.hasError('required') && university?.touched" style="color: red;">
 						University is required.
-					  </div>
+						</div>
+						<div *ngIf="university?.hasError('minlength') && !university?.hasError('required') && university?.touched" style="color: red;">
+						  University must be at least 3 characters.
+						</div>
 				</div>
 				</div>
 				<div class="login__row">
@@ -86,7 +98,16 @@
 					<input type="text" class="login__input" placeholder="Cin" formControlName="cin">
 					<div *ngIf="cin?.hasError('required') && cin?.touched" style="color: red;">
 						Cin is required.
-					  </div>
+						</div>
+						<div *ngIf="cin?.hasError('minlength') && !cin?.hasError('required') && cin?.touched" style="color: red;">
+						  Cin must be at least 8 characters.
+						</div>
+						<div *ngIf="cin?.hasError('maxlength') && !cin?.hasError('required') && cin?.touched" style="color: red;">
+						  Cin must be 8 characters max.
+						</div>
+						<div *ngIf="cin?.hasError('pattern') && !cin?.hasError('required') && cin?.touched" style="color: red;">
+						  Cin must be numeric.
+						</div>
 				</div>
                 
                 
@@ -96,7 +117,16 @@
 					<input type="text" class="login__input" placeholder="Phone number" formControlName="phoneNumber">
 					<div *ngIf="phoneNumber?.hasError('required') && phoneNumber?.touched" style="color: red;">
 						Phone number is required.
-					  </div>
+						</div>
+						<div *ngIf="phoneNumber?.hasError('minlength') && !phoneNumber?.hasError('required') && phoneNumber?.touched" style="color: red;">
+						  Phone number must be at least 8 characters.
+						</div>
+						<div *ngIf="phoneNumber?.hasError('maxlength') && !phoneNumber?.hasError('required') && phoneNumber?.touched" style="color: red;">
+						  Phone number must be 8 characters max.
+						</div>
+						<div *ngIf="phoneNumber?.hasError('pattern') && !phoneNumber?.hasError('required') && phoneNumber?.touched" style="color: red;">
+						  Phone number must be numeric.
+						</div>
 				</div>
 				
 				</div>

@@ -86,6 +86,10 @@ jwt=new JwtHelperService();
 
 
   modifier(){
+    if(this.userForm.invalid){
+      alert("Please fill in all the fields")
+      return;
+    }
     this.serviceUser.updateUser(this.jwt.decodeToken(Cookies.get('token')!)['_id'],this.userForm.value).subscribe(
       data=>{
         console.log(data);
