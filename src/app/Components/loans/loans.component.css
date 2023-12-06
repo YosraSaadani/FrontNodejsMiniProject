@@ -4,7 +4,10 @@
     width: 50%; /* Adjust the width as needed */
 }
 
-.table th,
+.table th{
+    text-align: center;
+    height: 100px;
+}
 .table td {
     text-align: center;
     height: 200px;

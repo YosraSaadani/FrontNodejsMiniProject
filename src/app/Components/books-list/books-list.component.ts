@@ -65,6 +65,23 @@ this.bookService.getAllBooks().subscribe((data:Book[])=>{
   this.booksParGenre=this.books;
   })
   }
+
+//   getRatingArray(id: string): Number[] {
+//     var rating=0;
+//     this.bookService.getBooksReviews(id).subscribe(
+//       (data: any) => {
+// this.bookService.getBookAverageRating(id).subscribe(
+// (data:any)=>{
+// rating=data;
+// rating=Math.round(rating);
+// return Array(rating).fill(0).map((_, index) => index + 1);
+
+// })
+
+//       }
+//     )
+//     return [1];
+//   }
   addToFavorite(id:string){
     if(Cookies.get('token')!=null)
     { this.serviceFavorite.createFavorite({user:this.jwt.decodeToken(Cookies.get('token')!)['_id'],book:id}).subscribe(

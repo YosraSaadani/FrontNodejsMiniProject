@@ -14,6 +14,7 @@ export class AdminbookEditComponent implements OnInit {
   bookId: string = "";
   book: any;
 bookForm!:FormGroup;
+parsedReleaseDate: Date = new Date();
 currentBook!:any;
   constructor(private bookService: BookService, private activatedRoute: ActivatedRoute,private formBuilder: FormBuilder) {
     this.bookForm = this.formBuilder.group({
@@ -33,7 +34,7 @@ currentBook!:any;
         name: this.book.name,
         type: this.book.type,
         author: this.book.author,
-        releaseDate: this.book.releaseDate,
+        releaseDate:  this.parsedReleaseDate.toISOString().split('T')[0],
         image: this.book.image,
         description: this.book.description,
         quantity: this.book.quantity,
@@ -76,6 +77,7 @@ currentBook!:any;
       this.bookService.getBookById(this.bookId).subscribe((data)=>this.currentBook=data)
       this.bookService.getBookById(this.bookId).subscribe((data) => {
         this.book = data;
+        this.parsedReleaseDate = new Date(this.book.releaseDate);
         console.log(this.book);
         this.ngOnChanges();
       });

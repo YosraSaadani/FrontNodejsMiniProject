@@ -60,7 +60,7 @@
       <div class="col-md-4 col-xs-6" >
         <div class="product">
           <div class="product-img" [routerLink]="['/books',b._id]" style="cursor: pointer;">
-            <img [src]="b.image" alt="" height="100%">
+            <img [src]="b.image" alt="" height="350px">
             <div class="product-label">
               <span class="new">NEW</span>
             </div>
@@ -69,9 +69,8 @@
             <p class="product-category">{{b.type}}</p>
             <h3 class="product-name"><a href="#">{{b.author}}</a></h3>
             <h4 class="product-price">{{b.name}}</h4>
-            <div class="product-rating">
-              <i class="fa fa-star"></i>
-            </div>
+          
+
             <div class="product-btns">
               <button class="add-to-wishlist" (click)="addToFavorite(b._id)"><i class="fa fa-heart"></i><span class="tooltipp">add to wishlist</span></button>
               <button class="quick-view" [routerLink]="['/books',b._id]"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
