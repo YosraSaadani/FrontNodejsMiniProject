@@ -6,7 +6,10 @@
 	padding: 0;	
 	font-family: Raleway, sans-serif;
 }
-
+.login__link-container {
+    text-align: right;
+    margin-top: 10px; /* Adjust as needed for spacing */
+}
 
 
 .container {

@@ -33,6 +33,7 @@ delete(id:string){
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe((data:any)=>{
       this.users=data;
+      this.users=this.users.filter((user)=>user.role!="admin");
       console.log(data);
     })
   }
